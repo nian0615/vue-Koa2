@@ -37,15 +37,30 @@
       <div class="reommend-title">
         商品推荐
       </div>
-      <div class="recommend-body"></div>
+      <div class="recommend-body">
+        <swiper :options="swiperOptions">
+          <swiper-slide v-for="(item, index) in recommend" :key="index">
+            <div class="recomment-item">
+              <img :src="item.image" alt="" width="80%" />
+              <div class="item-title">{{ item.goodsName }}</div>
+              <div>￥{{ item.price }}(￥{{ item.mallPrice }})</div>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 export default {
   name: "Home",
-  components: {},
+  components: {
+    Swiper,
+    SwiperSlide
+  },
   data() {
     return {
       // 打包后不会出错
@@ -53,7 +68,10 @@ export default {
       bannerImage: [],
       category: [],
       addBanner: "",
-      recommend: []
+      recommend: [],
+      swiperOptions: {
+        slidesPerView: 3
+      }
     };
   },
   created() {
@@ -67,11 +85,13 @@ export default {
           this.bannerImage = res.data.data.slides;
           this.recommend = res.data.data.recommend;
         }
+        // console.log(this.recommend, 11);
       })
       .catch(err => {
         console.log(err);
       });
   },
+  mounted() {},
   methods: {
     name() {}
   }
@@ -138,6 +158,13 @@ export default {
     color: @bgColor;
   }
   .recommend-body {
+    border-bottom: 1px solid #eee;
+    .recomment-item {
+      width: 99%;
+      border-right: 1px solid #eee;
+      text-align: center;
+      font-size: 12px;
+    }
   }
 }
 </style>
