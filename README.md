@@ -1,4 +1,4 @@
-# vue-temp
+# vue-Koa2-Mongo DB
 
 ## Project setup
 ```
