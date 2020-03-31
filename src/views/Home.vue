@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import service from "../service";
 import floor from "../components/floor";
 import goodsInfo from "../components/goodsInfo";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
@@ -114,7 +115,7 @@ export default {
   created() {},
   mounted() {
     this.$axios
-      .get("/data/1510940")
+      .get(service.getHome)
       .then(res => {
         console.log(res);
         if (res.status == 200) {
