@@ -43,29 +43,55 @@
             <div class="recomment-item">
               <img :src="item.image" alt="" width="80%" />
               <div class="item-title">{{ item.goodsName }}</div>
-              <div>￥{{ item.price }}(￥{{ item.mallPrice }})</div>
+              <div>
+                ￥{{ item.price | moneyFilter }}(￥{{
+                  item.mallPrice | moneyFilter
+                }})
+              </div>
             </div>
           </swiper-slide>
         </swiper>
       </div>
     </div>
-    <!-- 热卖部分 -->
+    <!-- floor -->
     <floor :floor="floor1" :floorTitle="floorTitle.floor1"></floor>
     <floor :floor="floor2" :floorTitle="floorTitle.floor2"></floor>
     <floor :floor="floor3" :floorTitle="floorTitle.floor3"></floor>
+    <!-- 热卖部分 -->
+    <div class="hot-area">
+      <div class="hot-title">热卖商品</div>
+      <div class="hot-goods">
+        <!--这里需要一个list组件-->
+        <van-list>
+          <van-row gutter="20">
+            <van-col span="12" v-for="(item, index) in hotGoods" :key="index">
+              <goods-info :data="{ ...item }"></goods-info>
+            </van-col>
+          </van-row>
+        </van-list>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import floor from "../components/floor";
+import goodsInfo from "../components/goodsInfo";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import { toMoney } from "../Filter/filter";
 export default {
   name: "Home",
   components: {
     Swiper,
     SwiperSlide,
-    floor
+    floor,
+    goodsInfo
+  },
+  filters: {
+    moneyFilter(money) {
+      return toMoney(money);
+    }
   },
   data() {
     return {
@@ -81,7 +107,8 @@ export default {
       floor1: [],
       floorTitle: {},
       floor2: [],
-      floor3: []
+      floor3: [],
+      hotGoods: []
     };
   },
   created() {},
@@ -99,12 +126,14 @@ export default {
           this.floorTitle = res.data.data.floorName;
           this.floor2 = res.data.data.floor2;
           this.floor3 = res.data.data.floor3;
+          this.hotGoods = res.data.data.hotGoods;
         }
       })
       .catch(err => {
         console.log(err);
       });
   },
+
   methods: {
     name() {}
   }
@@ -179,5 +208,12 @@ export default {
       font-size: 12px;
     }
   }
+}
+// 热卖部分
+.hot-area {
+  text-align: center;
+  font-size: 14px;
+  height: 1.8rem;
+  line-height: 1.8rem;
 }
 </style>

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="hot-title">
+    <div class="floor-title">
       {{ floorTitle }}
     </div>
-    <div class="hot">
-      <div class="hot-left">
+    <div class="floor">
+      <div class="floor-left">
         <img :src="floor[0].image" v-if="floor.length > 0" alt="" />
       </div>
       <div>
-        <div class="hot-right">
+        <div class="floor-right">
           <img :src="floor[1].image" v-if="floor.length > 0" alt="" />
         </div>
         <div>
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="hot-rule">
+    <div class="floor-rule">
       <div v-for="(item, index) in floor.slice(3)" :key="index">
         <img :src="item.image" width="100%" alt="" />
       </div>
@@ -42,8 +42,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-// hot 部分
-.hot-title {
+// floor 部分
+.floor-title {
   border-bottom: 1px solid #eee;
   background: #eee;
   margin-top: 0.2rem;
@@ -52,7 +52,7 @@ export default {
   font-weight: 700;
   text-align: center;
 }
-.hot {
+.floor {
   display: flex;
   flex-direction: row;
   background: #fff;
@@ -64,14 +64,14 @@ export default {
       width: 100%;
     }
   }
-  .hot-left {
+  .floor-left {
     border-right: 1px solid #ddd;
   }
-  .hot-right {
+  .floor-right {
     border-bottom: 1px solid #ddd;
   }
 }
-.hot-rule {
+.floor-rule {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
