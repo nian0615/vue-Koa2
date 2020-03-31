@@ -11,6 +11,18 @@ module.exports = {
 
     //注意 store 和 router 没必要配置
   }
+  /*devServer: {
+    open: process.platform === "darwin",
+    host: "192.168.0.101",
+    port: 8081,
+    https: false,
+    hotOnly: false,
+    // 查阅 https://github.com/vuejs/vue-doc-zh-cn/vue-cli/cli-service.md#配置代理
+    proxy: null, // string | Object
+    before: app => {
+      // `app` 是一个 express 实例
+    }
+  } */
 };
 // module.exports = {
 //   devServer: {

@@ -49,17 +49,23 @@
         </swiper>
       </div>
     </div>
+    <!-- 热卖部分 -->
+    <floor :floor="floor1" :floorTitle="floorTitle.floor1"></floor>
+    <floor :floor="floor2" :floorTitle="floorTitle.floor2"></floor>
+    <floor :floor="floor3" :floorTitle="floorTitle.floor3"></floor>
   </div>
 </template>
 
 <script>
+import floor from "../components/floor";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 export default {
   name: "Home",
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    floor
   },
   data() {
     return {
@@ -71,10 +77,15 @@ export default {
       recommend: [],
       swiperOptions: {
         slidesPerView: 3
-      }
+      },
+      floor1: [],
+      floorTitle: {},
+      floor2: [],
+      floor3: []
     };
   },
-  created() {
+  created() {},
+  mounted() {
     this.$axios
       .get("/data/1510940")
       .then(res => {
@@ -84,14 +95,16 @@ export default {
           this.addBanner = res.data.data.advertesPicture.PICTURE_ADDRESS;
           this.bannerImage = res.data.data.slides;
           this.recommend = res.data.data.recommend;
+          this.floor1 = res.data.data.floor1;
+          this.floorTitle = res.data.data.floorName;
+          this.floor2 = res.data.data.floor2;
+          this.floor3 = res.data.data.floor3;
         }
-        // console.log(this.recommend, 11);
       })
       .catch(err => {
         console.log(err);
       });
   },
-  mounted() {},
   methods: {
     name() {}
   }
