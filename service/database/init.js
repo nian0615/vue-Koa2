@@ -9,7 +9,8 @@ exports.initSchemas = () => {
 };
 exports.connect = () => {
   // 链接数据库
-  mongoose.connect(db);
+  mongoose.set("useCreateIndex", true); //加上这个 不报警告
+  mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true });
   //   正常连接才能执行以下代码，否则就要返回错误
   new Promise((resolve, reject) => {
     // 声明一个连接次数  以免数据库没开 一直请求连接

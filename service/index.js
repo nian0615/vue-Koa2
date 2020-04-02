@@ -13,18 +13,10 @@ let user = require("./appApi/user");
 let router = new Router();
 router.use("/user", user.routes(), user.allowedMethods());
 //立即执行函数
-/* (async () => {
+(async () => {
   await connect();
   await initSchemas();
-  const User = mongoose.model("User");
-  let oneUser = new User({ userName: "wgg2", password: "123456" });
-  oneUser.save().then(() => {
-    console.log("插入成功");
-  });
-  // 读出
-  let users = await User.findOne({}).exec();
-  console.log(users);
-})(); */
+})();
 
 app.use(router.routes()).use(router.allowedMethods());
 app.listen(3000, () => {
