@@ -8,10 +8,13 @@ const mongoose = require("mongoose");
 const bodyParser = require("koa-bodyparser");
 app.use(bodyParser());
 const Router = require("koa-router");
+
+// 引入
 let user = require("./appApi/user");
+let getGoods = require("./appApi/getGoods");
 
 let router = new Router();
-router.use("/user", user.routes(), user.allowedMethods());
+router.use("/user", user.routes()).use("/goods", getGoods.routes());
 //立即执行函数
 (async () => {
   await connect();

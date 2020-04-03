@@ -13,7 +13,9 @@ fs.readFile("./data_json/goods.json", "utf8", function(err, data) {
       pushData.push(value);
     }
   });
-  fs.writeFile("./newJson.json", JSON.stringify(pushData), function(err) {
+  fs.writeFile("./data_json/newJson.json", JSON.stringify(pushData), function(
+    err
+  ) {
     if (err) console.log("失败");
     else console.log("写入成功");
   });
