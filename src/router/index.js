@@ -23,6 +23,13 @@ const routes = [
     component: function() {
       return import("../views/login.vue");
     }
+  },
+  {
+    path: "/goods",
+    name: "Goods",
+    component: function() {
+      return import("../views/Goods.vue");
+    }
   }
 ];
 

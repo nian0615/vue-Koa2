@@ -65,7 +65,9 @@
         <van-list>
           <van-row gutter="20">
             <van-col span="12" v-for="(item, index) in hotGoods" :key="index">
-              <goods-info :data="{ ...item }"></goods-info>
+              <div @click="getId(item)">
+                <goods-info :data="{ ...item }"></goods-info>
+              </div>
             </van-col>
           </van-row>
         </van-list>
@@ -136,7 +138,17 @@ export default {
   },
 
   methods: {
-    name() {}
+    getId(item) {
+      // console.log(111);
+      // console.log(item);
+      this.$router.push({
+        path: "/goods",
+        // name: "Goods",
+        query: {
+          goodsId: item.goodsId
+        }
+      });
+    }
   }
 };
 </script>

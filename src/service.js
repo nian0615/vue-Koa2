@@ -3,6 +3,7 @@ const LOCAlurl = "http://localhost:3000";
 const URL = {
   getHome: BASEURL + "/data/1510940",
   register: LOCAlurl + "/user/register",
-  login: LOCAlurl + "/user/login"
+  login: LOCAlurl + "/user/login",
+  goods: LOCAlurl + "/goods/getGoodsInfo"
 };
 module.exports = URL;
