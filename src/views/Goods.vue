@@ -18,7 +18,7 @@
       价格：${{ goodsInfo.PRESENT_PRICE | moneyFilter }}元
     </div>
     <div class="goods-body">
-      <van-tabs>
+      <van-tabs swipeable sticky>
         <van-tab title="商品详情">
           <div class="detail" v-html="goodsInfo.DETAIL"></div>
         </van-tab>
@@ -26,8 +26,12 @@
       </van-tabs>
     </div>
     <div class="goods-foot">
-      <van-button type="primary">加入购物车</van-button>
-      <van-button type="danger">直接购买</van-button>
+      <div>
+        <van-button size="large" type="primary">加入购物车</van-button>
+      </div>
+      <div>
+        <van-button size="large" type="danger">直接购买</van-button>
+      </div>
     </div>
   </div>
 </template>
@@ -91,6 +95,18 @@ export default {
   font-size: 0;
 }
 .goods-foot {
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  div {
+    flex: 1;
+    padding: 5px;
+  }
 }
 </style>
