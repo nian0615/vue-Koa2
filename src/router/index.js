@@ -30,6 +30,13 @@ const routes = [
     component: function() {
       return import("../views/Goods.vue");
     }
+  },
+  {
+    path: "/categoryList",
+    name: "categoryList",
+    component: function() {
+      return import("../views/CategoryList.vue");
+    }
   }
 ];
 

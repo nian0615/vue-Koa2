@@ -87,14 +87,55 @@ router.get("/getGoodsInfo", async ctx => {
       ctx.body = { code: 500, message: err };
     });
 });
-// ======
-router.post("/getDetailGoodsInfo", async ctx => {
+// ====== 简写
+/* router.post("/getGoodsInfo", async ctx => {
   try {
     let goodsId = ctx.request.body.goodsId;
     const Goods = mongoose.model("Goods");
     let result = await Goods.findOne({ ID: goodsId }).exec();
     ctx.body = { code: 200, message: result };
   } catch (err) {
+    ctx.body = { code: 500, message: err };
+  }
+}); */
+// ----
+// 读取商品的大类
+router.get("/getGoodsList", async ctx => {
+  try {
+    const Category = mongoose.model("Category");
+    let result = await Category.find().exec(); // 得到所有数据
+    ctx.body = { code: 200, message: result };
+  } catch (err) {
+    ctx.body = { code: 500, message: err };
+  }
+});
+
+// 读取小类的信息
+router.post("/getGoodsListSub", async ctx => {
+  try {
+    let categoryId = ctx.request.body.categoryId;
+    // let categoryId = "1";
+    const CategorySub = mongoose.model("CategorySub");
+    let result = await CategorySub.find({
+      MALL_CATEGORY_ID: categoryId
+    }).exec();
+    ctx.body = { code: 200, message: result };
+  } catch (error) {
+    ctx.body = { code: 500, message: err };
+  }
+});
+
+// 根据类别获取列表
+router.get("/getGoodsListBycategoryId", async ctx => {
+  try {
+    // let categorySubId = ctx.request.body.categorySubId;
+    let categorySubId = "2c9f6c946016ea9b016016f79c8e0000";
+    const Goods = mongoose.model("Goods");
+    let result = await Goods.find({
+      SUB_ID: categorySubId
+    }).exec();
+    ctx.body = { code: 200, message: result };
+  } catch (error) {
     ctx.body = { code: 500, message: err };
   }
 });
