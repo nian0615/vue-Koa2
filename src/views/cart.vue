@@ -77,7 +77,7 @@ export default {
       if (localStorage.cartInfo) {
         this.cartInfo = JSON.parse(localStorage.cartInfo);
       }
-      console.log(JSON.stringify(this.cartInfo));
+      // console.log(JSON.stringify(this.cartInfo));
       this.isEmpty = this.cartInfo.length > 0 ? false : true;
     },
     //清空购物车的商品

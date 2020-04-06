@@ -111,7 +111,7 @@ export default {
       } else {
         this.$toast.success("已有此商品");
       }
-      this.$router.push({ name: "cart" }); //进行跳转
+      this.$router.push({ name: "Cart" }); //进行跳转
     },
   },
 };

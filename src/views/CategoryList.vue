@@ -97,10 +97,11 @@ export default {
   },
   mounted() {
     let widthHeight = document.documentElement.clientHeight;
-    // 46 头顶部的高度
-    document.getElementById("leftBar").style.height = widthHeight - 46 + "px";
+    // 46 头顶部的高度  50底部导航栏的高度
+    document.getElementById("leftBar").style.height =
+      widthHeight - 46 - 50 + "px";
     // List高度
-    document.getElementById("list").style.height = widthHeight - 90 + "px";
+    document.getElementById("list").style.height = widthHeight - 90 - 50 + "px";
   },
   methods: {
     // 跳转页面

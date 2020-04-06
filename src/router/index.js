@@ -1,15 +1,38 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Main from "../views/main.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "mainHome",
+    component: Main,
+    children: [
+      {
+        path: "/",
+        name: "Home",
+        component: Home,
+      },
+      {
+        path: "/categoryList",
+        name: "categoryList",
+        component: function () {
+          return import("../views/CategoryList.vue");
+        },
+      },
+      {
+        path: "/cart",
+        name: "Cart",
+        component: function () {
+          return import("../views/cart.vue");
+        },
+      },
+    ],
   },
+
   {
     path: "/register",
     name: "Register",
@@ -29,20 +52,6 @@ const routes = [
     name: "Goods",
     component: function () {
       return import("../views/Goods.vue");
-    },
-  },
-  {
-    path: "/categoryList",
-    name: "categoryList",
-    component: function () {
-      return import("../views/CategoryList.vue");
-    },
-  },
-  {
-    path: "/cart",
-    name: "cart",
-    component: function () {
-      return import("../views/cart.vue");
     },
   },
 ];

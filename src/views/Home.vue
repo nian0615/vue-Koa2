@@ -62,7 +62,7 @@
       <div class="hot-title">热卖商品</div>
       <div class="hot-goods">
         <!--这里需要一个list组件-->
-        <van-list>
+        <van-list style="height: 130rem; overflow: hidden;">
           <van-row gutter="20">
             <van-col span="12" v-for="(item, index) in hotGoods" :key="index">
               <div @click="getId(item)">
