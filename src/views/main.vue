@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="view">
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </div>
     <van-tabbar v-model="active" @change="changeRouter(active)">
       <van-tabbar-item icon="home-o">首页</van-tabbar-item>
