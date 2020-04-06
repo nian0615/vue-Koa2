@@ -8,42 +8,49 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "/register",
     name: "Register",
-    component: function() {
+    component: function () {
       return import("../views/Register.vue");
-    }
+    },
   },
   {
     path: "/login",
     name: "Login",
-    component: function() {
+    component: function () {
       return import("../views/login.vue");
-    }
+    },
   },
   {
     path: "/goods",
     name: "Goods",
-    component: function() {
+    component: function () {
       return import("../views/Goods.vue");
-    }
+    },
   },
   {
     path: "/categoryList",
     name: "categoryList",
-    component: function() {
+    component: function () {
       return import("../views/CategoryList.vue");
-    }
-  }
+    },
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: function () {
+      return import("../views/cart.vue");
+    },
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;

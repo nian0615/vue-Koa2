@@ -8,7 +8,7 @@
         <van-col span="16">
           <input type="text" class="search-input" />
         </van-col>
-        <van-col span="5" style="padding-left: .6rem;">
+        <van-col span="5" style="padding-left: 0.6rem;">
           <van-button size="mini">查找</van-button>
         </van-col>
       </van-row>
@@ -30,7 +30,7 @@
     </div>
     <!--addBanner - -->
     <div>
-      <img v-lazy="this.addBanner" style="width:100%" alt="" />
+      <img v-lazy="this.addBanner" style="width: 100%;" alt="" />
     </div>
     <!-- recommend -->
     <div class="recommend">
@@ -89,12 +89,12 @@ export default {
     Swiper,
     SwiperSlide,
     floor,
-    goodsInfo
+    goodsInfo,
   },
   filters: {
     moneyFilter(money) {
       return toMoney(money);
-    }
+    },
   },
   data() {
     return {
@@ -105,21 +105,21 @@ export default {
       addBanner: "",
       recommend: [],
       swiperOptions: {
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       floor1: [],
       floorTitle: {},
       floor2: [],
       floor3: [],
-      hotGoods: []
+      hotGoods: [],
     };
   },
   created() {},
   mounted() {
     this.$axios
       .get(service.getHome)
-      .then(res => {
-        console.log(res);
+      .then((res) => {
+        // console.log(res);
         if (res.status == 200) {
           this.category = res.data.data.category;
           this.addBanner = res.data.data.advertesPicture.PICTURE_ADDRESS;
@@ -132,7 +132,7 @@ export default {
           this.hotGoods = res.data.data.hotGoods;
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   },
@@ -145,11 +145,11 @@ export default {
         path: "/goods",
         // name: "Goods",
         query: {
-          goodsId: item.goodsId
-        }
+          goodsId: item.goodsId,
+        },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="less" scoped>
@@ -194,6 +194,7 @@ export default {
   margin: 0.3rem 0.3rem 0.3rem;
   border-radius: 0.3rem;
   div {
+    flex: 1;
     font-size: 12px;
     padding: 0.3rem;
     text-align: center;

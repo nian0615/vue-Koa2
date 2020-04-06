@@ -15,7 +15,7 @@
       {{ goodsInfo.NAME }}
     </div>
     <div class="goods-price">
-      价格：${{ goodsInfo.PRESENT_PRICE | moneyFilter }}元
+      价格：￥{{ goodsInfo.PRESENT_PRICE | moneyFilter }}元
     </div>
     <div class="goods-body">
       <van-tabs swipeable sticky>
@@ -27,7 +27,9 @@
     </div>
     <div class="goods-foot">
       <div>
-        <van-button size="large" type="primary">加入购物车</van-button>
+        <van-button @click="addGetCart" size="large" type="primary"
+          >加入购物车</van-button
+        >
       </div>
       <div>
         <van-button size="large" type="danger">直接购买</van-button>
@@ -43,16 +45,19 @@ export default {
   data() {
     return {
       goodsId: "",
-      goodsInfo: {}
+      goodsInfo: {},
     };
   },
   filters: {
     moneyFilter(money) {
       return toMoney(money);
-    }
+    },
   },
   created() {
-    this.goodsId = this.$route.query.goodsId;
+    this.goodsId = this.$route.query.goodsId
+      ? this.$route.query.goodsId
+      : this.$route.params.goodsId;
+
     this.getGoodsInfo();
   },
   methods: {
@@ -64,22 +69,51 @@ export default {
       this.$axios
         .get(url.goods, {
           params: {
-            goodsId: this.goodsId
-          }
+            goodsId: this.goodsId,
+          },
         })
-        .then(res => {
-          console.log(res);
+        .then((res) => {
+          // console.log(res);
           if (res.data.code == 200 && res.data.data) {
             this.goodsInfo = res.data.data;
           } else {
             this.$toast.fail("服务器错误 获取商品信息失败");
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
-    }
-  }
+    },
+
+    // 添加进购物车
+    addGetCart() {
+      //取出购物车内的商品数据
+      let cartInfo = localStorage.cartInfo
+        ? JSON.parse(localStorage.cartInfo)
+        : [];
+      //判断购物车内是否已经有这个商品
+      //如果没有返回undeifnd，如果有返回第一个查找到的数据
+      let isHaveGoods = cartInfo.find((cart) => cart.goodsId == this.goodsId);
+      // console.log(isHaveGoods);
+      if (!isHaveGoods) {
+        //没有商品直接添加到数组中
+        //重新组成添加到购物车的信息
+        let newGoodsInfo = {
+          goodsId: this.goodsInfo.ID,
+          name: this.goodsInfo.NAME,
+          price: this.goodsInfo.PRESENT_PRICE,
+          image: this.goodsInfo.IMAGE1,
+          count: 1,
+        };
+        cartInfo.push(newGoodsInfo); //添加到购物车
+        localStorage.cartInfo = JSON.stringify(cartInfo); //操作本地数据
+        this.$toast.success("添加成功");
+      } else {
+        this.$toast.success("已有此商品");
+      }
+      this.$router.push({ name: "cart" }); //进行跳转
+    },
+  },
 };
 </script>
 
